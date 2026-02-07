@@ -1,0 +1,594 @@
+/*
+═════════════════════════════════════════════════════════════════════
+LearnSphere - Modern Stylesheet
+═════════════════════════════════════════════════════════════════════
+Professional, clean CSS styling for the LearnSphere AI learning
+platform. Follows modern design principles with:
+- Mobile-responsive layout
+- Accessible color contrast
+- Smooth animations and transitions
+- Dark mode support
+
+Color Scheme:
+- Primary: Indigo (#6366f1)
+- Secondary: Purple (#8b5cf6)
+- Success: Green (#10b981)
+- Error: Red (#ef4444)
+═════════════════════════════════════════════════════════════════════
+*/
+
+/*
+═════════════════════════════════════════════════════════════════════
+CSS VARIABLES - Define colors and sizing once for easy updates
+═════════════════════════════════════════════════════════════════════
+*/
+:root {
+    /* Color palette */
+    --primary-color: #6366f1;      /* Main brand color (indigo) */
+    --primary-dark: #4f46e5;       /* Darker shade for hover states */
+    --secondary-color: #8b5cf6;    /* Secondary accent color (purple) */
+    --success-color: #10b981;      /* Success messages (green) */
+    --error-color: #ef4444;        /* Error messages (red) */
+    --warning-color: #f59e0b;      /* Warning messages (amber) */
+    
+    /* Neutral colors */
+    --bg-light: #f9fafb;           /* Light background */
+    --bg-white: #ffffff;           /* White background */
+    --text-dark: #1f2937;          /* Dark text (high contrast) */
+    --text-light: #6b7280;         /* Light text (secondary) */
+    --border-color: #e5e7eb;       /* Border color (subtle) */
+    
+    /* Shadows - layered for depth */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions - smooth animations */
+    --transition: all 0.3s ease;
+}
+
+/*
+═════════════════════════════════════════════════════════════════════
+GLOBAL STYLES - Reset and base element styling
+═════════════════════════════════════════════════════════════════════
+*/
+
+/* Reset default browser margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body styling - responsive flex layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    color: var(--text-dark);
+    line-height: 1.6;                    /* Improve readability */
+    min-height: 100vh;
+    display: flex;                       /* Make footer sticky */
+    flex-direction: column;
+}
+
+/*
+═════════════════════════════════════════════════════════════════════
+LAYOUT - Container, sections, and spacing
+═════════════════════════════════════════════════════════════════════
+*/
+
+/* Main content container - limits width and centers content */
+.container {
+    max-width: 900px;              /* Desktop breakpoint */
+    margin: 0 auto;
+    padding: 0 20px;               /* Responsive side padding */
+    width: 100%;
+}
+
+/* Main content area - flexible to push footer down */
+main.main-content {
+    flex: 1;                        /* Takes remaining vertical space */
+    padding: 40px 0;
+}
+
+/*
+═════════════════════════════════════════════════════════════════════
+HEADER & FOOTER - Top and bottom navigation areas
+═════════════════════════════════════════════════════════════════════
+*/
+
+/* Header with gradient background */
+.header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 60px 0;               /* Generous vertical spacing */
+    box-shadow: var(--shadow-md);
+}
+
+.header .container {
+    text-align: center;
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -1px;          /* Tight letter spacing for modern look */
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* Footer - sticky to bottom */
+.footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.footer p {
+    opacity: 0.8;
+}
+
+/*
+═════════════════════════════════════════════════════════════════════
+SECTIONS - Cards and content containers
+═════════════════════════════════════════════════════════════════════
+*/
+
+/* Card-style sections with shadow and padding */
+section {
+    background: var(--bg-white);
+    border-radius: 12px;           /* Modern rounded corners */
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 30px;
+}
+
+section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+}
+
+.divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 50px 0;
+}
+
+/*
+═════════════════════════════════════════════════════════════════════
+FORMS - Input fields and form controls
+═════════════════════════════════════════════════════════════════════
+*/
+
+/* Form layout with gaps between groups */
+.form {
+    display: grid;
+    gap: 25px;                     /* Space between form groups */
+}
+
+/* Individual form group (label + input) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                      /* Space between label and input */
+}
+
+/* Form labels */
+label {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+/* Text inputs and select dropdowns */
+input[type="text"],
+select {
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--bg-white);
+    color: var(--text-dark);
+    transition: var(--transition);  /* Smooth focus animation */
+}
+
+/* Focus state - highlight when clicked */
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);  /* Subtle glow */
+}
+
+/* Placeholder text styling */
+input[type="text"]::placeholder {
+    color: var(--text-light);
+}
+
+/* Helper text under inputs */
+small {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/*
+═════════════════════════════════════════════════════════════════════
+BUTTONS - Interactive button styles with hover/active states
+═════════════════════════════════════════════════════════════════════
+*/
+
+/* Base button styles */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Primary button - main call-to-action button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+    width: 100%;                    /* Full width on smaller screens */
+    padding: 14px 24px;
+    font-size: 1.05rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);   /* Lift on hover */
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+    transform: translateY(0);      /* Press down when clicked */
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Secondary button - alternative action button */
+.btn-secondary {
+    background: var(--bg-light);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ===========================
+   LOADERS & SPINNERS
+   =========================== */
+
+.loader {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ===========================
+   ALERTS & MESSAGES
+   =========================== */
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid;
+}
+
+.alert-error {
+    background: #fee2e2;
+    border-left-color: var(--error-color);
+    color: #991b1b;
+}
+
+.alert-success {
+    background: #dcfce7;
+    border-left-color: var(--success-color);
+    color: #166534;
+}
+
+.alert-warning {
+    background: #fef3c7;
+    border-left-color: var(--warning-color);
+    color: #78350f;
+}
+
+/* ===========================
+   CONTENT DISPLAY
+   =========================== */
+
+.content-display {
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-box {
+    background: var(--bg-light);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.content-box h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.content-output {
+    background: var(--bg-white);
+    padding: 20px;
+    border-radius: 6px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.content-metadata {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.meta-tag {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ===========================
+   CODE STYLING
+   =========================== */
+
+pre {
+    background: var(--text-dark);
+    color: #e5e7eb;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ===========================
+   AUDIO STYLING
+   =========================== */
+
+.audio-player {
+    background: var(--bg-white);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+audio {
+    width: 100%;
+    outline: none;
+}
+
+.audio-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+/* ===========================
+   VISUAL CONTENT
+   =========================== */
+
+.visual-message {
+    background: var(--bg-white);
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid var(--secondary-color);
+    margin-bottom: 15px;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* ===========================
+   EMPTY STATE
+   =========================== */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .form {
+        gap: 18px;
+    }
+
+    .header {
+        padding: 40px 0;
+    }
+
+    .main-content {
+        padding: 20px 0;
+    }
+
+    .divider {
+        margin: 30px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    section h2 {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .content-metadata {
+        gap: 8px;
+    }
+
+    .meta-tag {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ===========================
+   UTILITY CLASSES
+   =========================== */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+/* ===========================
+   DARK MODE COMPATIBILITY
+   =========================== */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-light: #1f2937;
+        --bg-white: #111827;
+        --text-dark: #f9fafb;
+        --text-light: #d1d5db;
+        --border-color: #374151;
+    }
+
+    body {
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+}

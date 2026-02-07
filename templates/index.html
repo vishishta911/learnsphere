@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- 
+═════════════════════════════════════════════════════════════════════
+LearnSphere - Main Frontend Page
+═════════════════════════════════════════════════════════════════════
+This is the main user interface for LearnSphere, allowing users to
+generate Machine Learning educational content in multiple formats.
+
+Features:
+- Topic input with learning level selection
+- Multiple content generation modes (text, code, audio, visual)
+- Real-time content display with interactive controls
+- Error handling and loading states
+
+═════════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+    <!-- Page metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSphere - AI-Powered Learning Platform</title>
+    
+    <!-- External CSS stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- ═════════════════════════════════════════════════════════════ -->
+    <!-- HEADER SECTION -->
+    <!-- ═════════════════════════════════════════════════════════════ -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">LearnSphere</h1>
+            <p class="subtitle">Learn Machine Learning with AI-Powered Explanations</p>
+        </div>
+    </header>
+
+    <!-- ═════════════════════════════════════════════════════════════ -->
+    <!-- MAIN CONTENT SECTION -->
+    <!-- ═════════════════════════════════════════════════════════════ -->
+    <main class="main-content">
+        <div class="container">
+            <!-- ─────────────────────────────────────────────────────── -->
+            <!-- INPUT SECTION -->
+            <!-- ─────────────────────────────────────────────────────── -->
+            <section class="input-section">
+                <h2>Generate Learning Content</h2>
+                
+                <form id="generateForm" class="form">
+                    <!-- Topic input field -->
+                    <div class="form-group">
+                        <label for="topic">Machine Learning Topic</label>
+                        <input 
+                            type="text" 
+                            id="topic" 
+                            name="topic" 
+                            placeholder="e.g., Neural Networks, Decision Trees, K-Means Clustering..."
+                            required
+                        >
+                        <small>Enter the ML topic you want to learn about</small>
+                    </div>
+
+                    <!-- Learning level dropdown -->
+                    <div class="form-group">
+                        <label for="depth">Learning Level</label>
+                        <select id="depth" name="depth" required>
+                            <option value="beginner" selected>Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <small>Choose your experience level with Machine Learning</small>
+                    </div>
+
+                    <!-- Content mode dropdown -->
+                    <div class="form-group">
+                        <label for="mode">Learning Mode</label>
+                        <select id="mode" name="mode" required>
+                            <option value="text" selected>Text Explanation</option>
+                            <option value="code">Python Code</option>
+                            <option value="audio">Audio Explanation</option>
+                            <option value="visual">Visual Diagram Prompt</option>
+                        </select>
+                        <small>Select how you want to learn</small>
+                    </div>
+
+                    <!-- Form submission button -->
+                    <button type="submit" class="btn btn-primary" id="generateBtn">
+                        <span id="btnText">Generate Content</span>
+                        <!-- Loader spinner shown during generation -->
+                        <span id="btnLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Visual divider between sections -->
+            <hr class="divider">
+
+            <!-- ─────────────────────────────────────────────────────── -->
+            <!-- OUTPUT SECTION -->
+            <!-- ─────────────────────────────────────────────────────── -->
+            <section class="output-section">
+                <h2>Generated Content</h2>
+
+                <!-- Error message container (hidden by default) -->
+                <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+
+                <!-- Loading state with spinner -->
+                <div id="loadingState" class="loading-state" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating content... Please wait.</p>
+                </div>
+
+                <!-- Content display container -->
+                <div id="contentDisplay" class="content-display" style="display: none;">
+                    <!-- Metadata tags showing request parameters -->
+                    <div class="content-metadata">
+                        <span class="meta-tag" id="topicTag"></span>
+                        <span class="meta-tag" id="depthTag"></span>
+                        <span class="meta-tag" id="modeTag"></span>
+                    </div>
+
+                    <!-- Text explanation content -->
+                    <div id="textContent" class="content-box" style="display: none;">
+                        <h3>📚 Explanation</h3>
+                        <div id="textOutput" class="content-output"></div>
+                    </div>
+
+                    <!-- Python code content -->
+                    <div id="codeContent" class="content-box" style="display: none;">
+                        <h3>💻 Python Code</h3>
+                        <pre><code id="codeOutput"></code></pre>
+                        <button class="btn btn-secondary" id="copyCodeBtn">Copy Code</button>
+                    </div>
+
+                    <!-- Audio explanation content -->
+                    <div id="audioContent" class="content-box" style="display: none;">
+                        <h3>🔊 Audio Explanation</h3>
+                        <p id="audioText" class="audio-text"></p>
+                        <!-- HTML5 audio player with native controls -->
+                        <div class="audio-player">
+                            <audio id="audioPlayer" controls>
+                                <p>Your browser does not support the audio element.</p>
+                            </audio>
+                        </div>
+                        <button class="btn btn-secondary" id="downloadAudioBtn">Download Audio</button>
+                    </div>
+
+                    <!-- Visual diagram prompt content -->
+                    <div id="visualContent" class="content-box" style="display: none;">
+                        <h3>🎨 Visualization Prompt</h3>
+                        <p id="visualMessage" class="visual-message"></p>
+                        <div id="visualOutput" class="content-output"></div>
+                    </div>
+
+                    <!-- Copy all content button -->
+                    <button class="btn btn-secondary" id="copyOutputBtn" style="margin-top: 20px;">
+                        Copy Output
+                    </button>
+                </div>
+
+                <!-- Empty state shown on page load -->
+                <div id="emptyState" class="empty-state">
+                    <p>👋 Enter a topic and click "Generate Content" to get started!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ═════════════════════════════════════════════════════════════ -->
+    <!-- FOOTER SECTION -->
+    <!-- ═════════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 LearnSphere. Powered by Google Gemini AI.</p>
+        </div>
+    </footer>
+
+    <!-- Link external JavaScript file -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
